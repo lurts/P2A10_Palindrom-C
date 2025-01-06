@@ -4,6 +4,8 @@
 
 #include "palindrom.h"
 
+#include <stdio.h>
+
 char toLower(char c) {
     if (c >= 'A' && c <= 'Z') {
         // 32, bzw 'a' - 'A' addieren um zu kleinbuchstaben umzuwandeln
@@ -30,6 +32,7 @@ void palidrome(const char text[], bool* is) {
         right++;
     }
     right--; // letztes zeichen ist '\0' also um 1 zurück gehen
+    right--;
 
     // palindrom test
     while (left < right) {
@@ -42,10 +45,20 @@ void palidrome(const char text[], bool* is) {
             right--;
         }
 
+        // debug ausgaben
+        printf("%c, %i, %c, %i", text[left], left, text[right], right);
+        printf("\n");
+
         // vergleiche zeichen links und rechts
         if (toLower(text[left]) != toLower(text[right])) {
             *is = false; // kein palindrom
             return;
         }
+
+        left++;
+        right--;
     }
+
+    *is = true;
+    return;
 }
