@@ -18,10 +18,6 @@ bool isAlpha(char c) {
     return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
-void removeNonAlpha(char text[]) {
-    // muss mir da noch was überlegen
-    // eventuell brauche ich diese funktion gar nicht aber idk
-}
 
 void palidrome(const char text[], bool* is) {
     unsigned int left = 0;      // index links
@@ -31,10 +27,11 @@ void palidrome(const char text[], bool* is) {
     while (text[right] != '\0') {
         right++;
     }
-    right--; // letztes zeichen ist '\0' also um 1 zurück gehen
-    right--;
+
+    printf("%u %u \n", left, right);
 
     // palindrom test
+    *is = true;
     while (left < right) {
         // überspringe nicht buchstaben links
         while(left < right && !isAlpha(text[left])) {
@@ -46,7 +43,7 @@ void palidrome(const char text[], bool* is) {
         }
 
         // debug ausgaben
-        printf("%c, %i, %c, %i", text[left], left, text[right], right);
+        printf("%c, %u, %c, %u", text[left], left, text[right], right);
         printf("\n");
 
         // vergleiche zeichen links und rechts
@@ -56,9 +53,11 @@ void palidrome(const char text[], bool* is) {
         }
 
         left++;
-        right--;
+        if (right > 0) {
+            right--;
+        }
+        //right--;
     }
 
-    *is = true;
     return;
 }

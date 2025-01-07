@@ -3,9 +3,6 @@
 #include <stdbool.h>
 #include "palindrom.h"
 
-#ifndef MAX_LENGTH
-#define MAX_LENGTH 255
-#endif
 
 int main(int argc, char* argv[]) {
     char input[MAX_LENGTH];
@@ -28,6 +25,8 @@ int main(int argc, char* argv[]) {
         }
         fgets(input, MAX_LENGTH, inFile);
         fclose(inFile);
+
+        printf("Inhalt der Datei: %s\n", input);
 
         palidrome(input, &isPalindrome);
     }
